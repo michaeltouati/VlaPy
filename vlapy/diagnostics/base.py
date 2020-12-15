@@ -26,7 +26,7 @@ import time
 
 import mlflow
 import numpy as np
-from scipy import fft
+from scipy import fft, ifft
 
 from matplotlib import pyplot as plt
 
@@ -126,7 +126,7 @@ def plot_e_vs_t(plots_dir, t, e, title, log=True):
 
 def plot_e_vs_w(plots_dir, w, e, title):
     this_fig, this_plt = __get_figure_and_plot__()
-    this_plt.semilogy(fft.fftshift(w), fft.fftshift(e), "-x")
+    this_plt.semilogy(np.fft.fftshift(w), np.fft.fftshift(e), "-x")
     this_plt.set_xlabel(r"Frequency ($\omega_p$)", fontsize=12)
     this_plt.set_ylabel(r"$\hat{\hat{E}}_{k=1}$", fontsize=12)
     this_plt.set_title(title, fontsize=14)

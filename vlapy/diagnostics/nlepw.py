@@ -22,7 +22,7 @@
 
 
 import numpy as np
-from scipy import fft
+from scipy import fft, ifft
 
 from vlapy.diagnostics import low_level_helpers as llh
 from vlapy.diagnostics import base
@@ -55,10 +55,10 @@ class NLEPW(base.BaseDiagnostic):
             2.0
             / storage_manager.fields_dataset["n"].coords["space"].data.size
             * np.abs(
-                fft.fft(
+                fft(
                     storage_manager.fields_dataset["n"].data,
                     axis=1,
-                    workers=-1,
+                    #workers=-1,
                 )
             )
         )
@@ -76,7 +76,7 @@ class NLEPW(base.BaseDiagnostic):
         ek = np.abs(
             2.0
             / xax.size
-            * fft.fft(storage_manager.fields_dataset["e"].data, axis=1, workers=-1)
+            * fft(storage_manager.fields_dataset["e"].data, axis=1)#, workers=-1)
         )
 
         ek_mag = [

@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 import numpy as np
-from scipy import fft
+from scipy import fft, ifft
 
 
 def compute_charges(f, dv):
@@ -46,7 +46,7 @@ def __fft_solve__(net_charge_density, one_over_kx):
     :return:
     """
 
-    return np.real(fft.ifft(1j * one_over_kx * fft.fft(net_charge_density)))
+    return np.real(ifft(1j * one_over_kx * fft(net_charge_density)))
 
 
 def solve_for_field(charge_density, one_over_kx):

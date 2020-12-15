@@ -22,7 +22,7 @@
 
 
 import numpy as np
-from scipy import fft
+from scipy import fft, ifft
 
 from vlapy.diagnostics import low_level_helpers as llh
 from vlapy.diagnostics import base
@@ -67,7 +67,7 @@ class LandauDamping(base.BaseDiagnostic):
         ek_rec = llh.get_nth_mode(storage_manager.fields_dataset["e"], 1)
 
         ek_mag = np.array([np.abs(ek_rec[it, 1]) for it in range(tax.size)])
-        ekw_mag = np.abs(fft.fft(np.array([ek_rec[it, 1] for it in range(tax.size)])))
+        ekw_mag = np.abs(fft(np.array([ek_rec[it, 1] for it in range(tax.size)])))
 
         ek1_shift = llh.get_nlfs(storage_manager.fields_dataset["e"], self.wepw)
 

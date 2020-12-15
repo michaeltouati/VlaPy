@@ -21,8 +21,7 @@
 # SOFTWARE.
 
 import numpy as np
-from scipy import interpolate, fft
-
+from scipy import interpolate, fft, ifft
 
 def _get_padded_grid_(ax):
     """
@@ -104,7 +103,7 @@ def get_vdfdx_exponential(kx, v):
         """
 
         return np.real(
-            fft.ifft(np.exp(-1j * kx[:, None] * dt * v) * fft.fft(f, axis=0), axis=0)
+            ifft(np.exp(-1j * kx[:, None] * dt * v) * fft(f, axis=0), axis=0)
         )
 
     return step_vdfdx_exponential
@@ -134,7 +133,7 @@ def get_edfdv_exponential(kv):
         """
 
         return np.real(
-            fft.ifft(np.exp(-1j * kv * dt * e[:, None]) * fft.fft(f, axis=1), axis=1)
+            ifft(np.exp(-1j * kv * dt * e[:, None]) * fft(f, axis=1), axis=1)
         )
 
     return step_edfdv_exponential
